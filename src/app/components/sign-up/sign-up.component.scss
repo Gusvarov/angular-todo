@@ -1,0 +1,28 @@
+.wrapper {
+    .form-wrapper {
+        margin-top: -100px;
+        .field {
+            display: flex;
+            flex-direction: column;
+            height: 50px;
+            justify-content: space-between;
+            margin-top: 20px;
+            width: 250px;
+    
+            label {
+                text-align: center;
+                text-transform: capitalize;
+            }
+        }
+    
+        .zipcode {
+            margin-bottom: 20px;
+        }
+
+        .btn-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

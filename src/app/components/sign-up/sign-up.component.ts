@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     name: ['', Validators.required],
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required]],
+    phone: ['', [Validators.required, Validators.pattern('[0-9 ]{12}')]],
     address: this.fb.group({
       street: [''],
       suite: [''],
@@ -24,13 +24,28 @@ export class SignUpComponent implements OnInit, OnDestroy {
     })
   });
 
-  // Validators.pattern('[0-9 ]{11}')
+  get name() {
+    return this.signUpForm.get('name');
+  }
+
+  get username() {
+    return this.signUpForm.get('username');
+  }
+
+  get email() {
+    return this.signUpForm.get('email');
+  }
+
+  get phone() {
+    return this.signUpForm.get('phone');
+  }
 
   constructor(private signUpService: SignUpService,
               private fb: FormBuilder,
               private router: Router) { }
 
   public ngOnInit(): void {
+
   }
 
   public onSubmit(): void {

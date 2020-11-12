@@ -1,39 +1,56 @@
 <div class="wrapper">
     <form class="form-wrapper" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-        <div class="name">
+        <div class="field name">
             <label>name</label>
             <input type="text" formControlName="name">
+            <div *ngIf="name.invalid && (name.touched || name.dirty)">
+                <span class="error" *ngIf="name.errors?.required">Required field</span>
+            </div>
         </div>
-        <div class="username">
+        <div class="field username">
             <label>username</label>
             <input type="text" formControlName="username">
+            <div *ngIf="username.invalid && (username.touched || username.dirty)">
+                <span class="error" *ngIf="username.errors?.required">Required field</span>
+            </div>
         </div>
-        <div class="email">
+        <div class="field email">
             <label>email</label>
             <input type="text" formControlName="email">
+            <div *ngIf="email.invalid && (email.touched || email.dirty)">
+                <span class="error" *ngIf="email.errors?.required">Required field</span>
+                <span class="error" *ngIf="email.errors?.email">Invalid email</span>
+            </div>
         </div>
-        <div class="phone">
+        <div class="field phone">
             <label>phone</label>
             <input type="text" formControlName="phone">
+            <div *ngIf="phone.invalid && (phone.touched || phone.dirty)">
+                <span class="error" *ngIf="phone.errors?.required">Required field</span>
+                <span class="error" *ngIf="phone.errors?.pattern">You can enter only numbers<br>(12 number is correct phone number)</span>
+            </div>
         </div>
         <div class="address-wrapper" formGroupName="address">
-            <div class="street">
+            <h2>Address(optional)</h2>
+            <div class="field street">
                 <label>street</label>
                 <input type="text" formControlName="street">
             </div>
-            <div class="suite">
+            <div class="field suite">
                 <label>suite</label>
                 <input type="text" formControlName="suite">
             </div>
-            <div class="city">
+            <div class="field city">
                 <label>city</label>
                 <input type="text" formControlName="city">
             </div>
-            <div class="zipcode">
+            <div class="field zipcode">
                 <label>zipcode</label>
                 <input type="text" formControlName="zipcode">
             </div>
         </div>
-        <button class="btn" type="submit" [disabled]="!signUpForm.valid">Sign In</button>
+        <div class="btn-wrapper">
+            <button class="btn" type="submit" [disabled]="!signUpForm.valid">Sign In</button>
+        </div>
     </form>
 </div>
