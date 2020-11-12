@@ -45,6 +45,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     };
     this.todos.unshift(todoData);
     this.sub = this.todoService.addTodo(todoData).subscribe();
+    this.todoForm.reset();
   }
 
   public completeTodo(todo: ITodo, id: number): void {
@@ -75,6 +76,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }
