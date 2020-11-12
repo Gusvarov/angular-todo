@@ -20,7 +20,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   public editTodoForm: FormGroup = this.fb.group({
     editTodo: ['', Validators.required]
   });
-
+  private id = 4;
   private userId = 0;
   public todos = [];
 
@@ -41,8 +41,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
     const todoData = {
       userId: this.userId,
       title: this.todoForm.value.addTodo,
-      completed: false
+      completed: false,
+      id: this.id
     };
+    this.id++;
     this.todos.unshift(todoData);
     this.sub = this.todoService.addTodo(todoData).subscribe();
     this.todoForm.reset();
@@ -53,8 +55,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.sub = this.todoService.editTodo(todo, id).subscribe();
   }
 
-  // I know todo.id is undefined, but Jsnoplaceholder is mocked API,
-  // and it always return id 201, so i made it like it should be, pass id in method
+  // I set my own id, because jsonplaceholder
+  // always return id 201, as it should do, but there are few bugs with this id
+  // so i set my own id
 
   public deleteTodo(id: number, index: number): void {
     this.todos.splice(index, 1);
