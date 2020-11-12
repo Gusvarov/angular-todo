@@ -1,3 +1,37 @@
 .completed-todo {
     text-decoration: line-through;
 }
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+    margin-top: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .add-todo {
+        display: flex;
+        flex-direction: column;
+        height: 100px;
+        justify-content: space-between;
+
+        .add-todo-label {
+            text-align: center;
+        }
+    }
+
+    .todo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 500px;
+
+        .edit {
+            height: 50px;
+            display: flex;
+            align-items: center;
+        }
+    }
+}

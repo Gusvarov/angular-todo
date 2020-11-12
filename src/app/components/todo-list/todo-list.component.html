@@ -1,23 +1,30 @@
-<div class="create-todo">
-    <form [formGroup]="todoForm" (ngSubmit)="onTodoAdd()">
-        <div class="add-todo">
-            <label>Add todo</label>
-            <input type="text" formControlName="addTodo">
-            <button [disabled]="!todoForm.valid">Add todo</button>
-        </div>
-    </form>
-</div>
-<div class="display-todo" *ngFor="let todo of todos; let i = index">
-    <div class="todo">
-        <p *ngIf="!todo.isEdit" [ngClass]="{
-            'completed-todo': todo.completed
-        }">{{todo.title}}</p>
-        <form class="edit" *ngIf="todo.isEdit" [formGroup]="editTodoForm" (ngSubmit)="submitEdit(todo, todo.id)">
-            <input type="text" formControlName="editTodo" [value]="todo.title">
-            <button [disabled]="!editTodoForm.valid">Submit</button>
+<div class="wrapper">
+    <div class="create-todo">
+        <form [formGroup]="todoForm" (ngSubmit)="onTodoAdd()">
+            <div class="add-todo">
+                <label class="add-todo-label">Add todo</label>
+                <input type="text" formControlName="addTodo">
+                <button class="btn" [disabled]="!todoForm.valid">Add todo</button>
+            </div>
         </form>
-        <button (click)="completeTodo(todo, todo.id, i)">{{todo.completed ? 'Mark as incomplete' : 'Mark as complete'}}</button>
-        <button (click)="deleteTodo(todo.id, i)">Delete</button>
-        <button (click)="editTodo(todo, todo.id)">Edit</button>
+    </div>
+    <div class="display-todo" *ngFor="let todo of todos; let i = index">
+        <div class="todo">
+            <div class="title">
+                <p *ngIf="!todo.isEdit" [ngClass]="{
+                    'completed-todo': todo.completed
+                }">{{todo.title}}</p>
+                <form class="edit" *ngIf="todo.isEdit" [formGroup]="editTodoForm" (ngSubmit)="submitEdit(todo, todo.id)">
+                    <input type="text" formControlName="editTodo" [value]="todo.title">
+                    <button class="btn"[disabled]="!editTodoForm.valid">Submit</button>
+                </form>
+            </div>
+            <div class="btns">
+                <button class="btn" (click)="completeTodo(todo, todo.id, i)">{{todo.completed ? 'Mark as incomplete' : 'Mark as complete'}}</button>
+                <button class="btn" (click)="deleteTodo(todo.id, i)">Delete</button>
+                <button class="btn" (click)="editTodo(todo, todo.id)">Edit</button>
+            </div>
+        </div>
+        <hr>
     </div>
 </div>
