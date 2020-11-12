@@ -1,0 +1,23 @@
+<div class="create-todo">
+    <form [formGroup]="todoForm" (ngSubmit)="onTodoAdd()">
+        <div class="add-todo">
+            <label>Add todo</label>
+            <input type="text" formControlName="addTodo">
+            <button [disabled]="!todoForm.valid">Add todo</button>
+        </div>
+    </form>
+</div>
+<div class="display-todo" *ngFor="let todo of todos; let i = index">
+    <div class="todo">
+        <p *ngIf="!todo.isEdit" [ngClass]="{
+            'completed-todo': todo.completed
+        }">{{todo.title}}</p>
+        <form class="edit" *ngIf="todo.isEdit" [formGroup]="editTodoForm" (ngSubmit)="submitEdit(todo, todo.id)">
+            <input type="text" formControlName="editTodo">
+            <button [disabled]="!editTodoForm.valid">Submit</button>
+        </form>
+        <button (click)="completeTodo(todo, todo.id, i)">{{todo.completed ? 'Mark as incomplete' : 'Mark as complete'}}</button>
+        <button (click)="deleteTodo(todo.id, i)">Delete</button>
+        <button (click)="editTodo(todo)">Edit</button>
+    </div>
+</div>

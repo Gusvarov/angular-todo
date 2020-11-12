@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <form class="form-wrapper" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="name">
+            <label>name</label>
+            <input type="text" formControlName="name">
+        </div>
+        <div class="username">
+            <label>username</label>
+            <input type="text" formControlName="username">
+        </div>
+        <div class="email">
+            <label>email</label>
+            <input type="text" formControlName="email">
+        </div>
+        <div class="phone">
+            <label>phone</label>
+            <input type="text" formControlName="phone">
+        </div>
+        <div class="address-wrapper" formGroupName="address">
+            <div class="street">
+                <label>street</label>
+                <input type="text" formControlName="street">
+            </div>
+            <div class="suite">
+                <label>suite</label>
+                <input type="text" formControlName="suite">
+            </div>
+            <div class="city">
+                <label>city</label>
+                <input type="text" formControlName="city">
+            </div>
+            <div class="zipcode">
+                <label>zipcode</label>
+                <input type="text" formControlName="zipcode">
+            </div>
+        </div>
+        <button class="btn" type="submit" [disabled]="!signUpForm.valid">Sign In</button>
+    </form>
+</div>
