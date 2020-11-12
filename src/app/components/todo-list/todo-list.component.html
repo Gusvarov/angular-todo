@@ -13,11 +13,11 @@
             'completed-todo': todo.completed
         }">{{todo.title}}</p>
         <form class="edit" *ngIf="todo.isEdit" [formGroup]="editTodoForm" (ngSubmit)="submitEdit(todo, todo.id)">
-            <input type="text" formControlName="editTodo">
+            <input type="text" formControlName="editTodo" [value]="todo.title">
             <button [disabled]="!editTodoForm.valid">Submit</button>
         </form>
         <button (click)="completeTodo(todo, todo.id, i)">{{todo.completed ? 'Mark as incomplete' : 'Mark as complete'}}</button>
         <button (click)="deleteTodo(todo.id, i)">Delete</button>
-        <button (click)="editTodo(todo)">Edit</button>
+        <button (click)="editTodo(todo, todo.id)">Edit</button>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ITodo } from 'src/app/models/todo.model';
@@ -10,6 +10,8 @@ import { TodoListService } from 'src/app/services/todo-list.service';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit, OnDestroy {
+  @ViewChildren('editInput')
+  public input: QueryList<any>;
   private sub: Subscription;
   public todoForm: FormGroup = this.fb.group({
     addTodo: ['', Validators.required],
@@ -50,15 +52,20 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.sub = this.todoService.editTodo(todo, id).subscribe();
   }
 
-  // I know todo.id is undefined, but Jsnoplaceholder is mocked API, and it always return id 201, so i made like it should be
+  // I know todo.id is undefined, but Jsnoplaceholder is mocked API,
+  // and it always return id 201, so i made it like it should be, pass id in method
 
   public deleteTodo(id: number, index: number): void {
     this.todos.splice(index, 1);
     this.sub = this.todoService.removeTodo(id).subscribe();
   }
 
-  public editTodo(todo: ITodo): void {
-    todo.isEdit = true;
+  public editTodo(todo: ITodo, id: number): void {
+    this.todos = this.todos.map(item => {
+      item.isEdit = item.id === id && !item.isEdit;
+      return item;
+    });
+    this.editTodoForm.controls.editTodo.valueChanges.subscribe(inputValue => inputValue = todo.title);
   }
 
   public submitEdit(todo: ITodo, id: number): void {
